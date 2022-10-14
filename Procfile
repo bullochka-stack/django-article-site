@@ -1,1 +1,1 @@
-web: gunicorn NewsSite.wsgi --log-file -
+web: gunicorn NewsSite.wsgi:application --log-file - --log-level debug
