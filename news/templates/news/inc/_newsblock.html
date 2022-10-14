@@ -1,0 +1,33 @@
+{% load static %}
+<div class="card mb-3">
+    <div class="card-header">
+        Категория: <a href="{{item.category.get_absolute_url}}">{{item.category}}</a>
+        <div class="float-right">
+            {% if item.user == None %}
+            Автор: Администрация
+            {% else %}
+             Автор: <a href="#" class="text-right">{{item.user}}</a>
+            {% endif %}
+        </div>
+    </div>
+    <div class="card-body">
+        {% if item.photo %}
+        <img width="274" height="274" src="{{item.photo.url}}" class="float-left mr-3" alt="">
+        {% else %}
+        <img width="274" height="274" src="/static/images/default-news-image.jpg" class="float-left mr-3" alt="">
+        {% endif %}
+        <h5 class="card-title">{{item.title}}</h5>
+        {% if flag %}
+        <p class="card-text">{{item.content|linebreaks}}</p>
+        {% else %}
+        <p class="card-text">{{item.content|truncatechars:255}}</p>
+        <a href="{{item.get_absolute_url}}" class="btn btn-dark">Читать статью</a>
+        {% endif %}
+        {% if user_profile_flag %}
+        <a href="{% url 'edit_news' item.pk %}" class="btn btn-dark">Редактировать</a>
+        {% endif %}
+    </div>
+    <div class="card-footer text-muted">
+        {{item.created_at}}
+    </div>
+ </div>

@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+{% load news_tags %}
+
+{% block title %}
+  {% site_title %} :: Добавление статьи
+{% endblock %}
+
+{% block sidebar %}
+{% include 'inc/_sidebar.html' %}
+{% endblock %}
+
+{% block content %}
+<h1>Создание статьи</h1>
+<form action="{% url 'add_news' %}" method="post" enctype="multipart/form-data">
+  {% csrf_token %}
+  {{form.non_field.errors}}
+  {{form.media}}
+  {{form.as_p}}
+  <button type="submit" class="btn btn-primary btn-block btn-dark">Создать статью</button>
+</form>
+{% endblock %}

@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+{% load news_tags %}
+
+{% block title %}
+  {% site_title %} :: {{ block.super }}
+{% endblock %}
+
+{% block sidebar %}
+{% include 'inc/_sidebar.html' %}
+{% endblock %}
+
+{% block content %}
+<h1>Редактирование статьи</h1>
+<form action="{% url 'edit_news' item.pk %}" method="post" enctype="multipart/form-data">
+  {% csrf_token %}
+  {{form.non_field.errors}}
+  {{form.media}}
+  {{form.as_p}}
+  <button type="submit" class="btn btn-primary btn-block btn-dark">Сохранить изменения</button>
+</form>
+<p></p>
+<form action="{% url 'delete_news' item.pk %}" method=post">
+  {% csrf_token %}
+  <button type="submit" class="btn btn-primary btn-block btn-danger">Удалить статью</button>
+</form>
+{% endblock %}

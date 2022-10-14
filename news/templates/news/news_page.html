@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+{% load news_tags %}
+
+{% block title %}
+  {% site_title %} :: {{ news.title }}
+{% endblock %}
+
+{% block sidebar %}
+{% include 'inc/_sidebar.html' %}
+{% endblock %}
+
+{% block content %}
+{% include 'news/inc/_newsblock.html' with flag=True %}
+{% include 'news/inc/_commentblock.html' %}
+{% endblock %}

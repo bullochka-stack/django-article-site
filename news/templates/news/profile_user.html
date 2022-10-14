@@ -1,0 +1,48 @@
+{% extends 'base.html' %}
+{% load news_tags %}
+
+{% block title %}
+  {% site_title %} :: Профиль
+{% endblock %}
+
+{% block sidebar %}
+{% include 'inc/_sidebar.html' %}
+{% endblock %}
+
+{% block content %}
+<h2>Профиль пользователя</h2>
+<div class="card" style="border-radius: 5px;">
+    <div class="card-body p-4">
+        <div class="d-flex text-black">
+            <div class="flex-grow-1 ms-3">
+                <h5 class="mb-1">{{user.username}}</h5>
+                <p class="mb-2 pb-1" style="color: #2b2a2a;">{{user.email}}</p>
+                <div class="d-flex justify-content-center rounded-3 p-2 mb-2"
+                     style="background-color: #efefef;">
+                    <div>
+                        <p class="small text-muted mb-1">Количество статей</p>
+                        <p class="mb-0">{{news|length}}</p>
+                    </div>
+                    <div class="px-3">
+                        <p class="small text-muted mb-1">Подписчики</p>
+                        <p class="mb-0">0</p>
+                    </div>
+                    <div>
+                        <p class="small text-muted mb-1">Рейтинг</p>
+                        <p class="mb-0">0</p>
+                    </div>
+                </div>
+                <div class="d-flex pt-1">
+                    <button type="button" class="btn btn-primary btn-dark flex-grow-1">Настройки</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<h3>Ваши статьи</h3>
+{% for item in news %}
+{% include 'news/inc/_newsblock.html' with user_profile_flag=True %}
+{% empty %}
+<h6 class="text-center">У вас пока нет статей! <a href="{% url 'add_news' %}">Создайте её!</a></h6>
+{% endfor %}
+{% endblock %}
