@@ -3,6 +3,7 @@ Django settings for NewsSite project.
 """
 import os
 from pathlib import Path
+import django_heroku
 import dj_database_url
 
 
@@ -13,13 +14,11 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = f'{os.getenv("SECURITY_KEY")}'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = ['*']
 
 
-db_from_env = dj_database_url.config()
-DATABASES['default'].update(db_from_env)
 
 # Application definition
 
@@ -194,5 +193,6 @@ CKEDITOR_CONFIGS = {
     }
 }
 
+django_heroku.settings(locals())
 db_from_env = dj_database_url.config()
 DATABASES['default'].update(db_from_env)
