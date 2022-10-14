@@ -19,7 +19,7 @@ ALLOWED_HOSTS = ['*']
 
 
 db_from_env = dj_database_url.config()
-DATABASE['default'].update(db_from_env)
+DATABASES['default'].update(db_from_env)
 
 # Application definition
 
@@ -193,3 +193,6 @@ CKEDITOR_CONFIGS = {
         ]),
     }
 }
+
+db_from_env = dj_database_url.config()
+DATABASES['default'].update(db_from_env)
