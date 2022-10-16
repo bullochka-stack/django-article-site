@@ -27,7 +27,7 @@ def edit_news(request, pk):
     if request.method == 'POST':
         form = AddNewsForm(request.POST, instance=item)
         if form.is_valid():
-            new_item = form.save(commit=False)
+            new_item = form.save(**form.cleaned_data)
             new_item.user = request.user
             new_item.save()
             messages.success(request, 'Статья обновлена')
@@ -144,7 +144,7 @@ def add_news(request):
     if request.method == "POST":
         form = AddNewsForm(request.POST)
         if form.is_valid():
-            news = form.save()
+            news = form.save(**form.cleaned_data)
             news.user = request.user
             news.save()
             return redirect(news)
